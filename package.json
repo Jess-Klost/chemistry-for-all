@@ -3,6 +3,6 @@
     "jest": "^30.5.1"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest --passWithNoTests"
   }
 }
