@@ -2,7 +2,7 @@ const Scale = require('./Scale');
 const WeightedObject = require('./WeightedObject');
 
 describe("Scale", () => {
-  describe("AddObjectToScale", () => {
+  describe("addObjectToScale", () => {
     let scale;
     let weightedObjects;
 
@@ -20,17 +20,17 @@ describe("Scale", () => {
     });
 
     test("Should add object to the empty array", () => {
-      scale.AddObjectToScale(weightedObjects[0]);
+      scale.addObjectToScale(weightedObjects[0]);
       expect(scale.objectsOnScale).toStrictEqual([weightedObjects[0]]);
     });
 
     test("Should add object to end array if other items are present", () => {
-      scale.AddObjectToScale(weightedObjects[1]);
+      scale.addObjectToScale(weightedObjects[1]);
       expect(scale.objectsOnScale).toStrictEqual([weightedObjects[0], weightedObjects[1]]);
     });
   });
 
-  describe("RemoveObjectFromScale", () => {
+  describe("removeObjectFromScale", () => {
     let scale;
     let weightedObjects;
 
@@ -44,39 +44,39 @@ describe("Scale", () => {
         new WeightedObject(5)
       ];
 
-      scale.AddObjectToScale(weightedObjects[0]);
-      scale.AddObjectToScale(weightedObjects[1]);
-      scale.AddObjectToScale(weightedObjects[2]);
-      scale.AddObjectToScale(weightedObjects[3]);
+      scale.addObjectToScale(weightedObjects[0]);
+      scale.addObjectToScale(weightedObjects[1]);
+      scale.addObjectToScale(weightedObjects[2]);
+      scale.addObjectToScale(weightedObjects[3]);
     });
 
     test("Should remove item from front of the array", () => {
-      scale.RemoveObjectFromScale(weightedObjects[0]);
+      scale.removeObjectFromScale(weightedObjects[0]);
       expect(scale.objectsOnScale).toStrictEqual([weightedObjects[1],
          weightedObjects[2], weightedObjects[3]]);
     });
 
     test("Should remove item from end of the array", () => {
-      scale.RemoveObjectFromScale(weightedObjects[3]);
+      scale.removeObjectFromScale(weightedObjects[3]);
       expect(scale.objectsOnScale).toStrictEqual([weightedObjects[0], 
           weightedObjects[1], weightedObjects[2]]);
     });
 
     test("Should remove item from middle of the array", () => {
-      scale.RemoveObjectFromScale(weightedObjects[2]);
+      scale.removeObjectFromScale(weightedObjects[2]);
       expect(scale.objectsOnScale).toStrictEqual([weightedObjects[0],
           weightedObjects[1], weightedObjects[3]]);
     });
 
     test("Should remove first duplicate from array", () => {
-      scale.AddObjectToScale(new WeightedObject(1));
-      scale.RemoveObjectFromScale(weightedObjects[2]);
+      scale.addObjectToScale(new WeightedObject(1));
+      scale.removeObjectFromScale(weightedObjects[2]);
       expect(scale.objectsOnScale).toStrictEqual([weightedObjects[0],
           weightedObjects[1], weightedObjects[3], new WeightedObject(1)]);
     });
   });
 
-  describe("GetCurrentWeight", () => {
+  describe("getCurrentWeight", () => {
     let scale;
     
     beforeEach(() => {
@@ -84,41 +84,41 @@ describe("Scale", () => {
     });
 
     test("Scale with no objects should have weight 0", () => {
-      expect(scale.GetCurrentWeight()).toBe(0);
+      expect(scale.getCurrentWeight()).toBe(0);
     });
 
     test("Scale with single object of weight 25 should return 25", () => {
-      scale.AddObjectToScale(new WeightedObject(25));
-      expect(scale.GetCurrentWeight()).toBe(25);
+      scale.addObjectToScale(new WeightedObject(25));
+      expect(scale.getCurrentWeight()).toBe(25);
     });
 
     test("Scale with multiple objects should total the sum of their weights", () => {
-      scale.AddObjectToScale(new WeightedObject(25));
-      scale.AddObjectToScale(new WeightedObject(1));
-      scale.AddObjectToScale(new WeightedObject(50));
-      scale.AddObjectToScale(new WeightedObject(1000));
-      expect(scale.GetCurrentWeight()).toBe(1076);
+      scale.addObjectToScale(new WeightedObject(25));
+      scale.addObjectToScale(new WeightedObject(1));
+      scale.addObjectToScale(new WeightedObject(50));
+      scale.addObjectToScale(new WeightedObject(1000));
+      expect(scale.getCurrentWeight()).toBe(1076);
     });
 
     test("Object with 0 weight should not influence weight", () => {
-      scale.AddObjectToScale(new WeightedObject(0));
-      scale.AddObjectToScale(new WeightedObject(0));
-      scale.AddObjectToScale(new WeightedObject(0));
-      scale.AddObjectToScale(new WeightedObject(0));
-      scale.AddObjectToScale(new WeightedObject(0));
-      expect(scale.GetCurrentWeight()).toBe(0);
-      scale.AddObjectToScale(new WeightedObject(1));
-      expect(scale.GetCurrentWeight()).toBe(1);
+      scale.addObjectToScale(new WeightedObject(0));
+      scale.addObjectToScale(new WeightedObject(0));
+      scale.addObjectToScale(new WeightedObject(0));
+      scale.addObjectToScale(new WeightedObject(0));
+      scale.addObjectToScale(new WeightedObject(0));
+      expect(scale.getCurrentWeight()).toBe(0);
+      scale.addObjectToScale(new WeightedObject(1));
+      expect(scale.getCurrentWeight()).toBe(1);
     });
 
     test("Objects with negative weight should not influence weight", () => {
-      scale.AddObjectToScale(new WeightedObject(-25));
-      scale.AddObjectToScale(new WeightedObject(-1000));
-      scale.AddObjectToScale(new WeightedObject(-200));
-      scale.AddObjectToScale(new WeightedObject(-2));
-      expect(scale.GetCurrentWeight()).toBe(0);
-      scale.AddObjectToScale(new WeightedObject(1));
-      expect(scale.GetCurrentWeight()).toBe(1);
+      scale.addObjectToScale(new WeightedObject(-25));
+      scale.addObjectToScale(new WeightedObject(-1000));
+      scale.addObjectToScale(new WeightedObject(-200));
+      scale.addObjectToScale(new WeightedObject(-2));
+      expect(scale.getCurrentWeight()).toBe(0);
+      scale.addObjectToScale(new WeightedObject(1));
+      expect(scale.getCurrentWeight()).toBe(1);
     });
   });
 });
