@@ -10,13 +10,20 @@ function replaceContent(newContent) {
     document.close();
 }
 
-function replaceElement(id, newContent, elementToFocus = '') {
+function replaceElement(id, newContent, elementToFocus = '', afterReplaceCallback = null) {
     oldContent = document.getElementById(id).innerHTML;
     document.getElementById(id).innerHTML = newContent;
     if (elementToFocus != '')
         focusElement(elementToFocus);
+
+    if (afterReplaceCallback != null)
+      afterReplaceCallback();
 }
 
 function focusElement(id) {
     document.getElementById(id).focus();
+}
+
+function setElementContent(id, content) {
+  document.getElementById(id).innerHTML = content;
 }

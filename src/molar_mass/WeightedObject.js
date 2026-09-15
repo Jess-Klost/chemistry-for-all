@@ -1,4 +1,4 @@
-module.exports = class WeightedObject {
+class WeightedObject {
   weight = 0;
 
   constructor(weight) {
@@ -8,4 +8,8 @@ module.exports = class WeightedObject {
   GetWeight() {
     return this.weight;
   }
+}
+
+if (typeof exports !== 'undefined') {
+  module.exports = WeightedObject;
 }
