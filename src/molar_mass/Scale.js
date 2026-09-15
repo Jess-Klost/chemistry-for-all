@@ -13,8 +13,8 @@ class Scale {
   getCurrentWeight() {
     var sum = 0;
     for (const object of this.objectsOnScale) {
-      if (object.GetWeight() >= 0) // ignore objects with negative weight
-        sum += object.GetWeight();
+      if (object.getWeight() >= 0) // ignore objects with negative weight
+        sum += object.getWeight();
     }
     return sum;
   }

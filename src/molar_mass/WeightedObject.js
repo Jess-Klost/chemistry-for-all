@@ -5,7 +5,7 @@ class WeightedObject {
     this.weight = weight;
   }
 
-  GetWeight() {
+  getWeight() {
     return this.weight;
   }
 }
