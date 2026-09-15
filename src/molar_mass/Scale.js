@@ -12,7 +12,8 @@ module.exports = class Scale {
   GetCurrentWeight() {
     var sum = 0;
     for (const object of this.objectsOnScale) {
-      sum += object.GetWeight();
+      if (object.GetWeight() >= 0) // ignore objects with negative weight
+        sum += object.GetWeight();
     }
     return sum;
   }
