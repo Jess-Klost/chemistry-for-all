@@ -5,9 +5,7 @@
 	</head>
 
 	<body>
-		<script type="text/javascript" src="src/molar_mass/WeightedObject.js"></script>
-		<script type="text/javascript" src="src/molar_mass/Scale.js"></script>
-		<script type="text/javascript" src="src/molar_mass/molarMassExperiment.js"></script>
+		<script type="module" src="src/molar_mass/MolarMassExperiment.js"></script>
 		<script type="text/javascript" src="src/pageBuilder.js"></script>
 
 		<div id="body">
@@ -17,7 +15,7 @@
 				<input type="button" id="cylinderButton" value="Select Cylinder"
 				 onclick="replaceElement('body', cylinderContent, 'back')"><br>
 				<input type="button" value="Select Scale" 
-                    onclick="replaceElement('body', scale.pageContent, 'back', () => setElementContent('weight-reading', 'The scale reads ' + scale.getCurrentWeight() + ' mg.'))"><br>
+                    onclick="replaceElement('body', molarMassExperiment.scale.pageContent, 'back', () => setElementContent('weight-reading', 'The scale reads ' + molarMassExperiment.scale.getCurrentWeight() + ' mg.'))"><br>
 				<input type="button" value="Select Faucet"><br>
 			</form>
 		</div>

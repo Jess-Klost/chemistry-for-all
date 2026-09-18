@@ -1,1 +1,0 @@
-var scale = new Scale();
