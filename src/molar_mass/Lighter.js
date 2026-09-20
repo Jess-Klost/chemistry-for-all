@@ -1,3 +1,14 @@
+// TODO: Find actual value for grams in a ml of butane
+const BUTANE_GRAMS_PER_ML = 0.002272727;
+
 class Lighter extends WeightedObject {
-  weight = 25;
+  // TODO: Find actual mass of an empty lighter
+  weight = 14;
+  // TODO: Find actual amount of butane in lighter
+  mlOfButane = 100;
+
+  getWeight() {
+    // Mass is the mass of the lighter plus the mass of the butane inside
+    return this.weight + (this.mlOfButane * BUTANE_GRAMS_PER_ML);
+  }
 }
