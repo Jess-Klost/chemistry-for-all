@@ -1,12 +1,12 @@
 class WeightedObject {
-  weight = 0;
+  mass = 0;
 
-  constructor(weight) {
-    this.weight = weight;
+  constructor(mass) {
+    this.mass = mass;
   }
 
-  getWeight() {
-    return this.weight;
+  getMass() {
+    return this.mass;
   }
 }
 

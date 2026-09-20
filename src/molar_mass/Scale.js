@@ -10,11 +10,11 @@ class Scale {
     this.objectsOnScale.splice(this.objectsOnScale.findIndex((element) => element == object), 1);
   }
 
-  getCurrentWeight() {
+  getCurrentMass() {
     var sum = 0;
     for (const object of this.objectsOnScale) {
-      if (object.getWeight() >= 0) // ignore objects with negative weight
-        sum += object.getWeight();
+      if (object.getMass() >= 0) // ignore objects with negative weight
+        sum += object.getMass();
     }
     return sum;
   }

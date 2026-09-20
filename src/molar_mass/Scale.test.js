@@ -76,7 +76,7 @@ describe("Scale", () => {
     });
   });
 
-  describe("getCurrentWeight", () => {
+  describe("getCurrentMass", () => {
     let scale;
     
     beforeEach(() => {
@@ -84,12 +84,12 @@ describe("Scale", () => {
     });
 
     test("Scale with no objects should have weight 0", () => {
-      expect(scale.getCurrentWeight()).toBe(0);
+      expect(scale.getCurrentMass()).toBe(0);
     });
 
     test("Scale with single object of weight 25 should return 25", () => {
       scale.addObjectToScale(new WeightedObject(25));
-      expect(scale.getCurrentWeight()).toBe(25);
+      expect(scale.getCurrentMass()).toBe(25);
     });
 
     test("Scale with multiple objects should total the sum of their weights", () => {
@@ -97,7 +97,7 @@ describe("Scale", () => {
       scale.addObjectToScale(new WeightedObject(1));
       scale.addObjectToScale(new WeightedObject(50));
       scale.addObjectToScale(new WeightedObject(1000));
-      expect(scale.getCurrentWeight()).toBe(1076);
+      expect(scale.getCurrentMass()).toBe(1076);
     });
 
     test("Object with 0 weight should not influence weight", () => {
@@ -106,9 +106,9 @@ describe("Scale", () => {
       scale.addObjectToScale(new WeightedObject(0));
       scale.addObjectToScale(new WeightedObject(0));
       scale.addObjectToScale(new WeightedObject(0));
-      expect(scale.getCurrentWeight()).toBe(0);
+      expect(scale.getCurrentMass()).toBe(0);
       scale.addObjectToScale(new WeightedObject(1));
-      expect(scale.getCurrentWeight()).toBe(1);
+      expect(scale.getCurrentMass()).toBe(1);
     });
 
     test("Objects with negative weight should not influence weight", () => {
@@ -116,9 +116,9 @@ describe("Scale", () => {
       scale.addObjectToScale(new WeightedObject(-1000));
       scale.addObjectToScale(new WeightedObject(-200));
       scale.addObjectToScale(new WeightedObject(-2));
-      expect(scale.getCurrentWeight()).toBe(0);
+      expect(scale.getCurrentMass()).toBe(0);
       scale.addObjectToScale(new WeightedObject(1));
-      expect(scale.getCurrentWeight()).toBe(1);
+      expect(scale.getCurrentMass()).toBe(1);
     });
   });
 });
