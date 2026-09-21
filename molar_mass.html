@@ -5,14 +5,16 @@
 	</head>
 
 	<body>
-		<script type="text/javascript" src="src/molar_mass/WeightedObject.js"></script>
-		<script type="text/javascript" src="src/molar_mass/Scale.js"></script>
-		<script type="text/javascript" src="src/molar_mass/Lighter.js"></script>
-		<script type="text/javascript" src="src/molar_mass/FillableObject.js"></script>
-		<script type="text/javascript" src="src/molar_mass/WaterTrough.js"></script>
-		<script type="text/javascript" src="src/molar_mass/Sink.js"></script>
-		<script type="text/javascript" src="src/molar_mass/MolarMassExperiment.js"></script>
+		<script type="module" src="src/molar_mass/MolarMassExperiment.js"></script>
 		<script type="text/javascript" src="src/pageBuilder.js"></script>
+        
+        <!-- Should probably use addEventListener instead on inline 
+         onclick handler, so that we don't need this. This is implemented like 
+         this currently because the front end is being overhauled anyways. -->
+        <script type="module">
+            import { molarMassExperiment } from "/src/molar_mass/MolarMassExperiment.js";
+            window.molarMassExperiment = molarMassExperiment;
+        </script>
 
 		<div id="body">
 			<h1 id="header">Molar Mass Experiment</h1>

@@ -1,5 +1,5 @@
-const Scale = require('./Scale');
-const WeightedObject = require('./WeightedObject');
+import Scale from "./Scale";
+import WeightedObject from "./WeightedObject";
 
 describe("Scale", () => {
   describe("addObjectToScale", () => {

@@ -1,4 +1,4 @@
-class WeightedObject {
+export default class WeightedObject {
   // Mass should be in grams
   mass = 0;
 
@@ -9,8 +9,4 @@ class WeightedObject {
   getMass() {
     return this.mass;
   }
-}
-
-if (typeof exports !== 'undefined') {
-  module.exports = WeightedObject;
 }

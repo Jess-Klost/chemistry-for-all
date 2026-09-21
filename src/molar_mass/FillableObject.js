@@ -1,4 +1,4 @@
-class FillableObject {
+export default class FillableObject {
   currentLevel = 0;
   capacity;
 
