@@ -1,4 +1,5 @@
 class WeightedObject {
+  // Mass should be in grams
   mass = 0;
 
   constructor(mass) {
