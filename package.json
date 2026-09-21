@@ -2,7 +2,14 @@
   "devDependencies": {
     "jest": "^30.5.1"
   },
+  "type": "module",
   "scripts": {
-    "test": "jest --passWithNoTests"
-  }
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+        "_site"
+    ]
+  },
+  "transform": {}
 }
