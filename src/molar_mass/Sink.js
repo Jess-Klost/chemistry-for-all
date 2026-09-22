@@ -1,4 +1,4 @@
-class Sink {
+export default class Sink {
   objectsInSink = new Array();
   isOn = false;
 

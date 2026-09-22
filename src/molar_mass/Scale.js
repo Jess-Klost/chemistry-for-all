@@ -1,4 +1,4 @@
-class Scale {
+export default class Scale {
   objectsOnScale = new Array();
   pageContent = '<h1>Scale</h1><input type="button" id="back" value="Back" onclick="replaceElement(\'body\', oldContent, \'cylinderButton\')" /><p id="weight-reading"></p>';
 
@@ -18,8 +18,4 @@ class Scale {
     }
     return sum;
   }
-}
-
-if (typeof exports !== 'undefined') {
-  module.exports = Scale;
 }
