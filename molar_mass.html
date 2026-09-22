@@ -1,31 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Molar Mass Experiment</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Molar Mass Experiment - Chemistry for All</title>
+		<style>
+			body {
+				font-family: Arial, Helvetica, sans-serif;
+				max-width: 40em;
+				margin: 1.5em auto;
+				padding: 0 1em;
+				line-height: 1.5;
+				color: #1a1a1a;
+			}
+			#status {
+				font-weight: bold;
+			}
+			button {
+				font-size: 1em;
+				padding: 0.5em 1em;
+				margin: 0.5em 0.5em 0.5em 0;
+			}
+			button:disabled {
+				opacity: 0.6;
+			}
+			:focus-visible {
+				outline: 3px solid #0b5fff;
+				outline-offset: 2px;
+			}
+		</style>
 	</head>
 
 	<body>
-		<script type="module" src="src/molar_mass/MolarMassExperiment.js"></script>
-		<script type="text/javascript" src="src/pageBuilder.js"></script>
-        
-        <!-- Should probably use addEventListener instead on inline 
-         onclick handler, so that we don't need this. This is implemented like 
-         this currently because the front end is being overhauled anyways. -->
-        <script type="module">
-            import { molarMassExperiment } from "/src/molar_mass/MolarMassExperiment.js";
-            window.molarMassExperiment = molarMassExperiment;
-        </script>
+		<header>
+			<h1>Molar Mass Experiment</h1>
+			<p id="status" role="status" aria-live="polite"></p>
+		</header>
 
-		<div id="body">
-			<h1 id="header">Molar Mass Experiment</h1>
-			<p>Press one of the following buttons to select something:</p>
-			<form>
-				<input type="button" id="cylinderButton" value="Select Cylinder"
-				 onclick="replaceElement('body', cylinderContent, 'back')"><br>
-				<input type="button" value="Select Scale" 
-                    onclick="replaceElement('body', molarMassExperiment.scale.pageContent, 'back', () => setElementContent('weight-reading', 'The scale reads ' + molarMassExperiment.scale.getCurrentMass() + ' g.'))"><br>
-				<input type="button" value="Select Faucet"><br>
-			</form>
-		</div>
+		<main id="app"></main>
+
+		<p><a href="index.html">Back to all experiments</a></p>
+
+		<script src="src/pageBuilder.js"></script>
+		<script type="module">
+			import { initExperiment } from "./src/molar_mass/experimentView.js";
+			initExperiment();
+		</script>
 	</body>
 </html>
