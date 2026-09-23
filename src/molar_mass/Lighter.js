@@ -46,4 +46,13 @@ export default class Lighter extends WeightedObject {
       this.connectedTubing.transferButane(mlToRelease);
     }
   }
+
+  connectTubing(tubing) {
+    if (tubing != null)
+      this.connectTubing = tubing;
+  }
+  
+  removedTubing() {
+    this.connectTubing = null;
+  }
 }
