@@ -48,11 +48,11 @@ export default class Lighter extends WeightedObject {
   }
 
   connectTubing(tubing) {
-    if (tubing != null)
+    if (this.connectedTubing != null)
       this.connectedTubing = tubing;
   }
 
-  removedTubing() {
+  removeTubing() {
     this.connectedTubing = null;
   }
 }

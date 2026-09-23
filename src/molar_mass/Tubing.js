@@ -6,4 +6,13 @@ export default class Tubing {
       // TODO: implement transferring butane to cylinder
     }
   }
+
+  connectCylinder(cylinder) {
+    if (this.connectedCylinder != null)
+      this.connectedCylinder = cylinder;
+  }
+
+  removeCylinder() {
+    this.connectedCylinder = null;
+  }
 }
