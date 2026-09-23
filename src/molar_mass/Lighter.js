@@ -30,8 +30,8 @@ export default class Lighter extends WeightedObject {
    */
   releaseButane(targetIncrement = 0.5) {
     // Get random number between -0.1 and 0.1, and add to targetIncrement to add
-    // some amount of error.
-    var mlToRelease = targetIncrement + (Math.random() * (0.1 - -0.1) + -0.1);
+    // some amount of error. Also, ensure the value is never below 0.
+    var mlToRelease = Math.max(targetIncrement + (Math.random() * (0.1 - -0.1) + -0.1), 0);
     
     // If trying to release more butane than is currently in the lighter, 
     // empty exactly the amount in the lighter
