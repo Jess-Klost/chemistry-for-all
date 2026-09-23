@@ -16,6 +16,6 @@ export default class FillableObject {
 
   addLiquid(amountToAdd) {
     // Clamp amount, so that amount never falls goes below 0 or above capacity
-    this.currentLevel += Math.max(0, Math.min(amountToAdd, this.capacity));
+    this.currentLevel = Math.max(0, Math.min(amountToAdd + this.currentLevel, this.capacity));
   }
 }
