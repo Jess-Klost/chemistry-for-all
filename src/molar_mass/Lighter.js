@@ -41,8 +41,9 @@ export default class Lighter extends WeightedObject {
     
     this.mlOfButane -= mlToRelease
     
+    // If tubing is connected, transfer butane through tubing
     if (this.connectedTubing != null) {
-      // TODO: implement transferring butane to tubing
+      this.connectedTubing.transferButane(mlToRelease);
     }
   }
 }
