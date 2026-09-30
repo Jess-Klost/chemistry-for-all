@@ -1,19 +1,34 @@
 import WeightedObject from "./WeightedObject.js ";
+import PressureSensor from "./PressureSensor.js";
+import Thermometer from "./Thermometer.js";
 
-// TODO: Find actual value for grams in a ml of butane
-const BUTANE_GRAMS_PER_ML = 0.002272727;
+const MOLAR_MASS_BUTANE = 58.1222;
+/**
+ * Gas constant for using L, atm, mol, and K.
+ */
+const GAS_CONSTANT = 0.08206;
 
 export default class Lighter extends WeightedObject {
   // TODO: Find actual mass of an empty lighter
   mass = 14;
   // TODO: Find actual amount of butane in lighter
-  mlOfButane = 100;
+  mlOfButane = 300;
 
   connectedTubing = null;
 
   getMass() {
     // Mass is the mass of the lighter plus the mass of the butane inside
-    return this.mass + (this.mlOfButane * BUTANE_GRAMS_PER_ML);
+    return this.mass + this.getMassButane();
+  }
+
+  getMassButane() {
+    // Use pV/RT = n to find amount of moles, then multiply by molar mass
+    return ((PressureSensor.pressureATM() * this.litersButane()) /
+      (Thermometer.temperatureKelvin() * GAS_CONSTANT)) * MOLAR_MASS_BUTANE;
+  }
+
+  litersButane() {
+    return this.mlOfButane * 0.001;
   }
 
   /**
