@@ -4,10 +4,19 @@ import WaterTrough from "./WaterTrough.js";
 export default class Cylinder extends FillableObject {
   capacity = 50;
 
-  // Pick an amount of difference in displaced level added when the cylinder
-  // is not leveled with the water trough, this represents the effect of the 
-  // water vapor
-  // TODO: verify if this is chemically accurate
+  /**
+   * The amount the displaced level is modified by when the cylinder is not leveled.
+   * 
+   * Due to the pressure exerted, the butane expands making
+   * the amount of displacement more than the amount butane in the cylinder.
+   * There is a way to calculate the realistic amount of displacement based on pressure,
+   * but this value is not pertinent to the experiment, 
+   * so we are using a random unchanging value between 0 and 1 as a simplification.
+   * 
+   * @access private
+   *
+   * @type {Number}
+   */
   static AMOUNT_TO_ADD_WHEN_NOT_LEVELED = Math.random();
 
   /**

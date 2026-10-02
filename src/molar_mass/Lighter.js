@@ -9,9 +9,7 @@ const MOLAR_MASS_BUTANE = 58.1222;
 const GAS_CONSTANT = 0.08206;
 
 export default class Lighter extends WeightedObject {
-  // TODO: Find actual mass of an empty lighter
   mass = 14;
-  // TODO: Find actual amount of butane in lighter
   mlOfButane = 300;
 
   connectedTubing = null;
