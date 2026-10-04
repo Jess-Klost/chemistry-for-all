@@ -6,6 +6,7 @@ export default class TitrationExperiment {
   cylinder25Ml = new Cylinder(25);
   cylinder50Ml = new Cylinder(50);  
   beaker = new Beaker();
+  wasteBeaker = new Beaker(600);
 }
 
 export var titrationExperiment = new TitrationExperiment();

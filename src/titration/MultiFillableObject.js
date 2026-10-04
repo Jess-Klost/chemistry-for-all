@@ -1,5 +1,5 @@
-import Liquid from "./Liquid.js";
-import Water from "./Water.js";
+import Liquid from "./liquids/Liquid.js";
+import Water from "./liquids/Water.js";
 
 export default class MultiFillableObject {
   /**
