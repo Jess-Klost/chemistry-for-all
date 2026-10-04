@@ -1,10 +1,7 @@
 import MultiFillableObject from "./MultiFillableObject.js";
 import SodiumChloride from "./liquids/SodiumChloride.js";
 import SilverNitrate from "./liquids/SilverNitrate.js";
-
-const SOLUBILITY_CONSTANTS = {
-  AgCl: 0.00000000018
-};
+import { SOLUBILITY_CONSTANTS } from "./liquids/Liquid.js";
 
 export default class Beaker extends MultiFillableObject {
   capacity = 50;
