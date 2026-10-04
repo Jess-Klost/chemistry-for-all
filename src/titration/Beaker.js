@@ -25,18 +25,23 @@ export default class Beaker extends MultiFillableObject {
     // Calculation of titrand concentration changes based on whether the titrant
     // or titrand is in excess, we can use the equivalence point to determine this
     var titrandConcentration;
+    const equivalencePoint = this.expectedEquivalencePoint(titrandType, titrantType);
+
+    // If titrand and titrant are at equivalent concentrations
+    // Note: this boolean statement measures equality within a certain margin,
+    // this is to prevent values like 3.999 and 4.001 from giving unexpected
+    // values
+    if (Math.abs(amountOfTitrant - equivalencePoint) < 0.001) {
+      titrandConcentration = Math.sqrt(SOLUBILITY_CONSTANTS[solubilityConstantKey]);
+    }
     // If titrant is in excess
-    if (amountOfTitrant > this.expectedEquivalencePoint(titrandType, titrantType)) {
+    else if (amountOfTitrant > equivalencePoint) {
       const titrantConcentration = 
         ((titrantType.molarConcentration * amountOfTitrant )
         - (titrandType.molarConcentration * amountOfTitrand)) / 
         (amountOfTitrand + amountOfTitrant);
         
       titrandConcentration = SOLUBILITY_CONSTANTS[solubilityConstantKey] / titrantConcentration;
-    }
-    // If titrand and titrant are at equivalent concentrations 
-    else if (amountOfTitrant == this.expectedEquivalencePoint(titrandType, titrantType)) {
-      titrandConcentration = Math.sqrt(SOLUBILITY_CONSTANTS[solubilityConstantKey]);
     }
     // If titrand is in excess
     else {
