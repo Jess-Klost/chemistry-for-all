@@ -1,5 +1,5 @@
-import FillableObject from "../molar_mass/FillableObject.js";
+import MultiFillableObject from "./MultiFillableObject.js";
 
-export default class Beaker extends FillableObject {
+export default class Beaker extends MultiFillableObject {
   capacity = 50;
 }

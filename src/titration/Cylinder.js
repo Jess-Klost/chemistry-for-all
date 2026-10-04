@@ -1,5 +1,5 @@
-import FillableObject from "../molar_mass/FillableObject.js";
+import MultiFillableObject from "./MultiFillableObject.js";
 
-export default class Cylinder extends FillableObject {
+export default class Cylinder extends MultiFillableObject {
   capacity = 10;
 }
