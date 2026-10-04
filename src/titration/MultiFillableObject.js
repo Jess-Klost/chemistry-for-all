@@ -46,7 +46,7 @@ export default class MultiFillableObject {
       // If trying to remove more than possible, clear all liquids and return
       if (amountToRemove >= currentLevel) {
         this.liquids.clear();
-        return;
+        return currentLevel;
       }
       const percentToRemove = (currentLevel - amountToRemove) / currentLevel;
       for (const liquidInfo of this.liquids) {
@@ -57,9 +57,12 @@ export default class MultiFillableObject {
       this.liquids.set(liquidType, this.liquids.get(liquidType) - amountToRemove);
       // Remove from liquid type if removing results in it being 0 or less
       if (this.liquids.get(liquidType) <= 0) {
+        const actualAmountRemoved = this.liquids.get(liquidType);
         this.liquids.delete(liquidType);
+        return actualAmountRemoved;
       } 
     }
+    return amountToRemove;
   }
 
   getCurrentLevel() {
