@@ -1,4 +1,5 @@
 import Liquid from "./liquids/Liquid.js";
+import SodiumChloride from "./liquids/SodiumChloride.js";
 import Water from "./liquids/Water.js";
 
 export default class MultiFillableObject {
@@ -40,13 +41,16 @@ export default class MultiFillableObject {
   }
 
   removeLiquid(amountToRemove, liquidType = null) {
+    // Make copy of liquids to keep track of what liquids have been removed
+    const originalLiquids = new Map(this.liquids);
+    const removedLiquids = this.liquids;
     // If no type specified, evenly remove from each type to keep ratio the same
     if (liquidType == null) {
       const currentLevel = this.getCurrentLevel();
       // If trying to remove more than possible, clear all liquids and return
       if (amountToRemove >= currentLevel) {
         this.liquids.clear();
-        return currentLevel;
+        return this.liquidMapDifference(originalLiquids, removedLiquids);
       }
       const percentToRemove = (currentLevel - amountToRemove) / currentLevel;
       for (const liquidInfo of this.liquids) {
@@ -57,12 +61,34 @@ export default class MultiFillableObject {
       this.liquids.set(liquidType, this.liquids.get(liquidType) - amountToRemove);
       // Remove from liquid type if removing results in it being 0 or less
       if (this.liquids.get(liquidType) <= 0) {
-        const actualAmountRemoved = this.liquids.get(liquidType);
         this.liquids.delete(liquidType);
-        return actualAmountRemoved;
       } 
     }
-    return amountToRemove;
+    return this.liquidMapDifference(originalLiquids, removedLiquids);
+  }
+
+  /**
+   * 
+   * @access private
+   * 
+   * @param {Map<Liquid, Number>} liquidMap1 
+   * @param {Map<Liquid, Number>} liquidMap2
+   * 
+   */
+  liquidMapDifference(liquidMap1, liquidMap2) {
+    var differenceMap = new Map();
+    
+    var currentLiquidDifference = 0;
+    for (const liquid of liquidMap1) {
+      currentLiquidDifference = liquid[1];
+      if (liquidMap2.has(liquid[0])) {
+        currentLiquidDifference = liquidMap1.get(liquid[0]) - liquidMap2.get(liquid[0]);
+      }
+      if (currentLiquidDifference > 0) // only include liquids that have changed
+        differenceMap.set(liquid[0], currentLiquidDifference);
+    }
+
+    return differenceMap;
   }
 
   getCurrentLevel() {
