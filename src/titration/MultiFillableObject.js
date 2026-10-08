@@ -1,5 +1,4 @@
 import Liquid from "./liquids/Liquid.js";
-import SodiumChloride from "./liquids/SodiumChloride.js";
 import Water from "./liquids/Water.js";
 
 export default class MultiFillableObject {
@@ -26,6 +25,11 @@ export default class MultiFillableObject {
     this.liquids.clear();
   }
 
+  /**
+   * 
+   * @param {Number} amountToAdd 
+   * @param {Liquid} liquidType 
+   */
   addLiquid(amountToAdd, liquidType = Water) {
     const currentLevel = this.getCurrentLevel();
     var newAmount = amountToAdd;
@@ -38,6 +42,16 @@ export default class MultiFillableObject {
       newAmount += this.liquids.get(liquidType);
     }
     this.liquids.set(liquidType, newAmount);
+  }
+
+  /**
+   * 
+   * @param {Map<Liquid, Number>} liquidMapToAdd 
+   */
+  addLiquidMap(liquidMapToAdd) {
+    for (const liquid of liquidMapToAdd) {
+      this.addLiquid(liquid[1], liquid[0]);
+    }
   }
 
   removeLiquid(amountToRemove, liquidType = null) {
@@ -97,5 +111,20 @@ export default class MultiFillableObject {
       total += liquidInfo[1];
     }
     return total;
+  }
+
+  /**
+   * Convenience function to remove liquid from this MultiFillableObject and add 
+   * it to another MultiFillableObject. 
+   * 
+   * @param {MultiFillableObject} objectToTransferTo 
+   * @param {Number} amount 
+   * @param {Liquid} liquidType 
+   */
+  transferLiquid(objectToTransferTo, amount, liquidType = null) {
+    if (liquidType == null)
+      objectToTransferTo.addLiquid(this.removeLiquid(amount));
+    else
+      objectToTransferTo.addLiquid(this.removeLiquid(amount, liquidType));
   }
 }
