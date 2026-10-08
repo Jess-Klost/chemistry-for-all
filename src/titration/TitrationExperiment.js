@@ -1,5 +1,8 @@
 import Cylinder from "./Cylinder.js";
 import Beaker from "./Beaker.js";
+import Buret from "./Buret.js";
+import RingStand from "./RingStand.js";
+import ButterflyClamp from "./ButterflyClamp.js";
 
 export default class TitrationExperiment {
   cylinder10Ml = new Cylinder(10);
@@ -7,6 +10,9 @@ export default class TitrationExperiment {
   cylinder50Ml = new Cylinder(50);  
   beaker = new Beaker();
   wasteBeaker = new Beaker(600);
+  buret = new Buret();
+  ringStand = new RingStand();
+  butterflyClamp = new ButterflyClamp();
 }
 
 export var titrationExperiment = new TitrationExperiment();
