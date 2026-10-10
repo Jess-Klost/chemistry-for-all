@@ -2,11 +2,20 @@ import MultiFillableObject from "./MultiFillableObject.js";
 import SodiumChloride from "./liquids/SodiumChloride.js";
 import SilverNitrate from "./liquids/SilverNitrate.js";
 import { SOLUBILITY_CONSTANTS } from "./liquids/Liquid.js";
+import AprilSample from "./liquids/AprilSample.js";
+import MarchSample from "./liquids/MarchSample.js";
 
 export default class Beaker extends MultiFillableObject {
   capacity = 50;
 
-  getTitrationCurveValue(titrandType = SodiumChloride, titrantType = SilverNitrate, solubilityConstantKey = "AgCl") {
+  getTitrationCurveValue(titrandType = null, titrantType = null, solubilityConstantKey = "") {
+    if (titrandType == null || titrantType == null || solubilityConstantKey == "") {
+      const reactants = this.solveForReactants();
+      titrandType = reactants["titrand"];
+      titrantType = reactants["titrant"];
+      solubilityConstantKey = reactants["result"];
+    }
+
     // Formulas for these calculations were found on the LibreTexts Chemistry 
     // "Precipitation Titration" page. See the "9.5.1 Titration Curves" section
     // for the formulas used.
@@ -58,10 +67,39 @@ export default class Beaker extends MultiFillableObject {
     return pTitrand;
   }
 
-  expectedEquivalencePoint(titrandType = SodiumChloride, titrantType = SilverNitrate) {
+  expectedEquivalencePoint(titrandType = null, titrantType = null) {
+    if (titrandType == null || titrantType == null) {
+      const reactants = this.solveForReactants();
+      titrandType = reactants["titrand"];
+      titrantType = reactants["titrant"];
+    }
     if (this.liquids.has(titrandType)) {
       return (titrandType.molarConcentration * this.liquids.get(titrandType)) / titrantType.molarConcentration;
     }
     return undefined;
+  }
+
+  solveForReactants() {
+    if (this.liquids.has(SodiumChloride)) {
+      return {
+        titrand: SodiumChloride,
+        titrant: SilverNitrate,
+        result: "AgCl"
+      }
+    }
+    else if (this.liquids.has(AprilSample)) {
+      return {
+        titrand: AprilSample,
+        titrant: SilverNitrate,
+        result: "AgCl"
+      }
+    }
+    else if (this.liquids.has(MarchSample)) {
+      return {
+        titrand: MarchSample,
+        titrant: SilverNitrate,
+        result: "AgCl"
+      }
+    }
   }
 }
